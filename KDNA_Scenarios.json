@@ -20,8 +20,16 @@
             "state": "Count the cognitive verbs: create, evaluate, select, revise. Three or more from different categories = task mixing.",
             "need": "Split the prompt into sequenced tasks: first generate options, then evaluate, then select."
           },
-          "action_template": "Identify which cognitive tasks are mixed. Recommend splitting into separate prompts with dependency order. Do not add instructions to the existing prompt.",
-          "replace": "Do not add 'be more specific' or 'think step by step.' Split the tasks.",
+          "action_template": [
+            "Identify all cognitive tasks in the prompt (generate, evaluate, revise, decide).",
+            "If 3+ categories detected, classify as task mixing.",
+            "Recommend splitting into sequenced prompts: (1) generate, (2) evaluate, (3) decide.",
+            "Do not add instructions to the existing prompt — decomposition is the fix."
+          ],
+          "replace": [
+            { "avoid": "Adding role, format, or chain-of-thought instructions", "use": "Splitting the prompt by cognitive stance: one task per prompt, sequenced by dependency" },
+            { "avoid": "Suggesting 'be more specific' without identifying what kind of specificity", "use": "Specifying whether the prompt needs outcome specificity, context specificity, or task decomposition" }
+          ],
           "expected_result": "Each subtask produces output optimized for one cognitive stance. Final result is coherent because it was built sequentially."
         }
       ]
@@ -29,18 +37,26 @@
     {
       "id": "scene_user_adds_instructions_without_improvement",
       "name": "User keeps improving the prompt but results do not improve",
-      "trigger_signal": "User describes multiple iterations of prompt refinement with marginal or no improvement. 'I tried adding a role, specifying format, using chain of thought, but it still does not work.'",
+      "trigger_signal": "User describes multiple iterations of prompt refinement with marginal or no improvement.",
       "sub_scenarios": [
         {
           "id": "sub_goal_ambiguity",
           "trap_belief": "The model needs better instructions to understand the task.",
           "three_questions": {
             "belief": "Can the user describe what a correct output would enable them to do next — without seeing the output?",
-            "state": "If the user needs to read the output to know if it is correct, the success criteria are implicit — the model cannot optimize for them.",
-            "need": "A concrete outcome specification: 'I need to decide X' or 'I need to send Y to Z.' Not 'I need a good response.'"
+            "state": "If the user needs to read the output to know if it is correct, the success criteria are implicit.",
+            "need": "A concrete outcome specification: 'I need to decide X' or 'I need to send Y to Z.'"
           },
-          "action_template": "Ask the user: 'If the output were perfect, what specific action would you take next?' If they cannot answer, the prompt goal is ambiguous.",
-          "replace": "Do not iterate on the prompt. Define the outcome first. Then rebuild the prompt around that outcome.",
+          "action_template": [
+            "Ask: 'If the output were perfect, what specific action would you take next?'",
+            "If user cannot answer, classify as goal ambiguity.",
+            "Do not iterate on the prompt. Define the outcome with the user first.",
+            "Rebuild the prompt around the outcome definition."
+          ],
+          "replace": [
+            { "avoid": "Iterating on the prompt wording without defining success", "use": "First defining the outcome: what decision or action the output should enable" },
+            { "avoid": "Adding more format constraints to an ambiguous-goal prompt", "use": "Making the goal explicit: 'This output will be used to [specific action]'" }
+          ],
           "expected_result": "User articulates what 'correct' means before prompting again. The rewritten prompt includes the outcome definition."
         }
       ]
