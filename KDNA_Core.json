@@ -1,0 +1,80 @@
+{
+  "meta": {
+    "version": "0.4",
+    "domain": "prompt_diagnosis",
+    "created": "2026-05-20",
+    "purpose": "Encode prompt diagnosis judgment so AI identifies why a prompt failed — not just suggests format improvements. The root cause is usually task mixing, goal ambiguity, or context missing, not missing role/format/constraint tags.",
+    "load_condition": "Load when the user asks why a prompt did not work, how to fix a failing prompt, or for prompt review/diagnosis."
+  },
+  "axioms": [
+    {
+      "id": "axiom_task_mixing_is_root_cause",
+      "one_sentence": "Most prompt failures are caused by task mixing, not missing format elements.",
+      "full_statement": "When a prompt asks the model to simultaneously generate content, evaluate that content, rewrite it, and decide on a strategy, the model cannot determine which goal has priority. The result is usually correct in format but wrong in substance — the model optimizes for form because it cannot optimize for multiple conflicting goals.",
+      "why": "Agents default to suggesting format improvements (add a role, specify output format, add constraints) because task mixing is invisible to surface-level analysis. This produces prompts that look better but fail in the same way — now with better formatting."
+    },
+    {
+      "id": "axiom_goal_ambiguity_defeats_instruction_precision",
+      "one_sentence": "A perfectly formatted prompt with an ambiguous goal will fail more reliably than a messy prompt with a clear goal.",
+      "full_statement": "If the model cannot determine what 'success' means for this specific task — a decision, a piece of content, a classification, an evaluation — no amount of role-playing, chain-of-thought instruction, or output formatting will rescue it. The model needs to know what the finished state looks like, not just what format it should use.",
+      "why": "Prompt optimizers focus on input formatting because it is measurable. But goal ambiguity is the deeper problem. An agent diagnosing a prompt must identify whether the user could recognize a correct answer if they saw one — if not, the prompt is unanswerable regardless of format."
+    },
+    {
+      "id": "axiom_context_gap_is_not_instruction_gap",
+      "one_sentence": "When a prompt fails, the missing element is more often context than instruction.",
+      "full_statement": "Users add more instructions when prompts fail: 'be more specific,' 'think step by step,' 'consider the audience.' But the model already knows how to be specific and think step by step. What it lacks is the context needed to make a specific judgment — the actual constraints, the real tradeoffs, the specific person and situation. More instructions without more context makes prompts longer, not better.",
+      "why": "Agents mirror the user's instinct to add instructions. The agent must redirect from 'add more instructions' to 'what context is the model missing that it cannot infer from the instructions?'.'"
+    }
+  ],
+  "ontology": [
+    {
+      "id": "task_mixing",
+      "one_sentence": "A prompt that asks the model to perform multiple incompatible cognitive tasks in a single response.",
+      "essence": "The model is asked to do things that require different cognitive stances: generating (create something new), evaluating (judge something existing), rewriting (change form while preserving substance), and deciding (choose between options with criteria). These stances conflict because generating requires openness, evaluating requires criteria, rewriting requires fidelity, and deciding requires closure.",
+      "boundary": "It is not simply asking the model to do multiple things. A prompt that asks 'analyze the data and write a report' combines compatible tasks (analysis feeds writing). A prompt that asks 'write a marketing email, evaluate whether it is convincing, suggest improvements, and decide if we should send it' mixes incompatible tasks (generation, evaluation, revision, and decision in one pass).",
+      "trigger_signal": "The prompt contains verbs from at least three of these four categories: generate/create/write, evaluate/assess/judge, revise/improve/rewrite, decide/choose/recommend."
+    },
+    {
+      "id": "goal_ambiguity",
+      "one_sentence": "The model cannot determine what a successful output looks like because the prompt defines process but not outcome.",
+      "essence": "A prompt may specify format, role, tone, length, and structure — but if the user cannot answer 'how would I know if the output is correct?' without reading it, the goal is ambiguous. The model will produce something that meets the format criteria but may completely miss the unstated outcome.",
+      "boundary": "It is not the same as 'the prompt is too vague.' A prompt can be specific about process (steps, format, constraints) while remaining ambiguous about outcome (what decision should this enable? what action should follow?).",
+      "trigger_signal": "The prompt specifies many HOW elements (format, role, steps) but zero WHAT-FOR elements (what decision this enables, what action follows, what problem this solves)."
+    }
+  ],
+  "frameworks": [
+    {
+      "id": "frame_prompt_triage",
+      "name": "Prompt Triage",
+      "when_to_use": "Use when diagnosing why a prompt failed. Do not lead with 'add role/format/constraints.' Lead with diagnosis.",
+      "steps": [
+        "Identify task mixing: does this prompt ask for generation AND evaluation AND decision in one pass? If yes, split into separate prompts sequenced by dependency.",
+        "Identify goal ambiguity: can the user describe what a correct output looks like without seeing it? If no, the prompt needs an outcome specification, not more instructions.",
+        "Identify context gap: what does the model need to know that it cannot infer from the instructions — specific constraints, real tradeoffs, actual stakeholders?",
+        "After fixing these three, then — and only then — consider format improvements (role, structure, constraints)."
+      ]
+    }
+  ],
+  "core_structure": [
+    {
+      "from": "prompt_produces_wrong_output",
+      "to": "task_mixing_or_goal_ambiguity",
+      "via": "checking whether the prompt mixes generation/evaluation/decision, or whether the user can define 'correct output' without seeing it"
+    },
+    {
+      "from": "user_adds_more_instructions",
+      "to": "longer_prompt_same_failure",
+      "via": "checking whether the added instructions address task mixing, goal ambiguity, or context gaps — if not, they only add noise"
+    },
+    {
+      "from": "well_formatted_prompt_still_fails",
+      "to": "format_optimized_but_goal_unclear",
+      "via": "the model delivers correct format with wrong substance because format was specified but outcome was not"
+    }
+  ],
+  "stances": [
+    "Do not suggest format improvements (role, structure, constraints) until task mixing, goal ambiguity, and context gaps are eliminated.",
+    "A prompt that produces a good-looking wrong answer is more dangerous than a prompt that produces an obviously bad answer. Diagnose the first case more aggressively.",
+    "If the user cannot write one sentence describing what a perfect output would enable them to do next, the prompt is not ready for optimization — it needs an outcome definition first."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "kdna_spec": "0.4",
+  "name": "prompt_diagnosis",
+  "version": "0.1.0",
+  "status": "experimental",
+  "access": "open",
+  "language": "en",
+  "author": {
+    "name": "KDNA Team",
+    "id": "kdna-team"
+  },
+  "license": {
+    "type": "CC-BY-4.0"
+  },
+  "keywords": ["prompt engineering", "prompt diagnosis", "prompt optimization", "task mixing", "goal ambiguity"],
+  "description": "Prompt diagnosis judgment — identify why a prompt failed (task mixing, goal ambiguity, context gap), not just suggest format improvements.",
+  "core_insight": "Most prompt failures are task mixing and goal ambiguity, not missing format elements. Fix the cognitive conflict before the formatting."
+}

@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "version": "0.4",
+    "domain": "prompt_diagnosis",
+    "created": "2026-05-20",
+    "purpose": "Define terminology, common misunderstandings, and self-checks for prompt diagnosis.",
+    "load_condition": "Always load with KDNA_Core.json before diagnosing prompt failures."
+  },
+  "terminology": {
+    "standard_terms": [
+      {
+        "term": "task mixing",
+        "definition": "A prompt that asks the model to perform multiple incompatible cognitive tasks — generate, evaluate, revise, decide — in a single response, causing priority conflict."
+      },
+      {
+        "term": "goal ambiguity",
+        "definition": "The model cannot determine what success looks like because the prompt specifies process (how) but not outcome (what-for)."
+      },
+      {
+        "term": "context gap",
+        "definition": "The model lacks information it needs to make a specific judgment that cannot be inferred from the instructions — real constraints, tradeoffs, stakeholders, or situational details."
+      },
+      {
+        "term": "format optimization",
+        "definition": "Improvements to role, structure, output format, or constraints that make the prompt look better but do not address task mixing, goal ambiguity, or context gaps — cosmetic changes."
+      }
+    ],
+    "banned_terms": [
+      {
+        "term": "add a role",
+        "why": "Adding a role is the most common surface-level fix that ignores root causes. When a prompt fails because of task mixing, adding 'you are an expert' does nothing to resolve the cognitive conflict.",
+        "replace_with": "first check for task mixing, goal ambiguity, and context gaps — then decide if role specification is actually needed"
+      },
+      {
+        "term": "be more specific",
+        "why": "It tells the user what to do without diagnosing what kind of specificity is missing. The prompt may need outcome specificity (what decision follows), context specificity (real constraints), or task specificity (one cognitive task at a time).",
+        "replace_with": "identify which type of specificity is missing: outcome, context, or task decomposition"
+      },
+      {
+        "term": "use chain of thought",
+        "why": "Chain of thought helps with reasoning quality but cannot fix task mixing or goal ambiguity. The model will chain-of-thought its way to a well-reasoned answer to the wrong question.",
+        "replace_with": "after fixing task mixing and goal ambiguity, consider chain of thought for the specific reasoning task"
+      }
+    ]
+  },
+  "misunderstandings": [
+    {
+      "id": "misread_longer_prompt_is_better_prompt",
+      "wrong": "A longer, more detailed prompt will produce better results than a shorter one.",
+      "correct": "Length often correlates with task mixing and instruction bloat. A prompt that is long because it mixes three tasks is worse than three short prompts that each do one thing. A prompt that is long because it adds format instructions without adding context is worse than a short prompt with clear outcome definition.",
+      "key_distinction": "Length from task decomposition and context addition improves results. Length from task mixing and instruction redundancy degrades results. The agent must distinguish which kind of length is present.",
+      "why": "Prompt engineers fixate on adding more — more role details, more format specs, more constraints. The agent should push for removal: remove mixed tasks, remove unneeded instructions, remove ambiguity before adding anything."
+    },
+    {
+      "id": "misread_good_output_format_equals_good_prompt",
+      "wrong": "If the model produces output in the correct format, the prompt is working.",
+      "correct": "Correct format with wrong substance is the most dangerous failure mode because it passes surface inspection. The model can produce perfectly formatted JSON or beautifully structured prose while completely missing the actual goal. Prompt diagnosis must evaluate substance before format.",
+      "key_distinction": "Format compliance = the output looks right. Goal achievement = the output enables the intended next action. A prompt can achieve the first and fail the second.",
+      "why": "Users and agents both tend to check format first because it is visible. The agent must actively look past format to check whether the output would actually enable the user's next step."
+    }
+  ],
+  "self_check": [
+    "Did I check for task mixing before suggesting any format changes?",
+    "Can the user describe what a correct output would enable them to do next — or is the goal still ambiguous?",
+    "Did I distinguish between missing instructions and missing context?",
+    "Did I avoid suggesting 'add a role,' 'be more specific,' or 'use chain of thought' as generic fixes?",
+    "Did I check whether the output is format-correct but substance-wrong — the most dangerous failure mode?"
+  ]
+}
