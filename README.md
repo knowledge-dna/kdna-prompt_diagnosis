@@ -22,6 +22,10 @@ kdna install github:knowledge-dna/kdna-prompt_diagnosis
 |------|---------|
 | KDNA_Core.json | Axioms, ontology, frameworks, core causal structure, stances |
 | KDNA_Patterns.json | Terminology, banned terms, misunderstandings, self-checks |
+| KDNA_Scenarios.json | Scenario signals that should shift strategy |
+| KDNA_Cases.json | Concrete cases showing structure rather than scripts |
+| KDNA_Reasoning.json | Reasoning chains: conclusion → logic → so_what |
+| KDNA_Evolution.json | Capability stages, measurable indicators, growth paths |
 | kdna.json | Domain manifest |
 
 ## Validate

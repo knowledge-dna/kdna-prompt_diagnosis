@@ -1,0 +1,20 @@
+{
+  "meta": {
+    "version": "0.4",
+    "domain": "prompt_diagnosis",
+    "created": "2026-05-20",
+    "purpose": "Capability stages for prompt diagnosis — from format optimist to task decomposition diagnostician.",
+    "load_condition": "Load when user asks about improving prompt engineering skills."
+  },
+  "stages": [
+    { "id": "stage_format_optimist", "name": "Format Optimist", "description": "Suggests adding role, format, constraints. Assumes all prompt problems are instruction problems.", "indicators": ["Adds role specifications", "Suggests output format templates", "Recommends chain of thought"] },
+    { "id": "stage_task_decomposer", "name": "Task Decomposer", "description": "Identifies task mixing and splits prompts by cognitive stance. Diagnoses before optimizing.", "indicators": ["Counts cognitive verbs before suggesting changes", "Recommends splitting before formatting", "Checks goal ambiguity before instruction precision"] },
+    { "id": "stage_prompt_architect", "name": "Prompt Architect", "description": "Designs prompt systems where outputs feed inputs, task sequences are optimized, and evaluation criteria are built into the pipeline.", "indicators": ["Designs multi-step prompt pipelines", "Embeds evaluation criteria into generation prompts", "Creates feedback loops between prompt stages"] }
+  ],
+  "evolution_layers": [
+    { "id": "layer_format_to_decomposition", "name": "From format to decomposition", "capability": "Stop adding instructions. Start identifying task mixing and splitting by cognitive stance.", "from_stage": "format_optimist", "to_stage": "task_decomposer" }
+  ],
+  "measurement": [
+    { "id": "meas_task_mixing_detection", "what": "Percentage of prompt diagnosis sessions where task mixing is checked before format suggestions", "how": "Review agent output for task decomposition language vs format addition language", "threshold": "> 90%" }
+  ]
+}

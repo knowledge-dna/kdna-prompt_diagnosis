@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "version": "0.4",
+    "domain": "prompt_diagnosis",
+    "created": "2026-05-20",
+    "purpose": "Cases showing prompt diagnosis in action — task mixing, goal ambiguity, context gaps.",
+    "load_condition": "Load when user asks for examples of prompt failure diagnosis."
+  },
+  "cases": [
+    {
+      "id": "case_task_mixing_marketing_email",
+      "title": "Marketing email prompt mixes four cognitive tasks",
+      "context": "A user's prompt: 'Write a marketing email for our new product. Evaluate whether it is convincing. Suggest three improvements. Then tell me which version to send.' The output is a well-formatted email with generic evaluation and vague improvement suggestions.",
+      "what_happened": "Without KDNA, the agent suggests adding role specification, audience details, and format constraints. With KDNA, the agent identifies four cognitive tasks in one prompt: generate (write), evaluate (is it convincing), revise (suggest improvements), decide (which version to send). The model defaults to producing a generic answer because it cannot optimize for all four simultaneously. Recommendation: Split into three sequential prompts — (1) generate 3 email variants, (2) evaluate each against specific criteria, (3) select the best one with rationale.",
+      "what_was_learned": "Task mixing is the most common invisible prompt failure. Adding more instructions to a task-mixed prompt makes it longer but not better. The fix is decomposition, not elaboration.",
+      "structural_pattern": "single_prompt_four_tasks → model_defaults_to_generic → more_instructions_added → same_failure → need_decomposition"
+    }
+  ]
+}

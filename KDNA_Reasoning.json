@@ -1,0 +1,22 @@
+{
+  "meta": {
+    "version": "0.4",
+    "domain": "prompt_diagnosis",
+    "created": "2026-05-20",
+    "purpose": "Reasoning chains for prompt diagnosis.",
+    "load_condition": "Load when user asks why prompt optimization approaches often fail."
+  },
+  "reasoning_chains": [
+    {
+      "id": "chain_format_cannot_fix_task_mixing",
+      "one_sentence": "Adding format constraints to a task-mixed prompt is like putting a better frame on a broken lens — it looks better but still does not focus.",
+      "logic": [
+        "When a prompt mixes generation, evaluation, and decision, the model faces conflicting optimization targets.",
+        "Format instructions tell the model how to structure output, not what to prioritize.",
+        "The model will produce well-formatted output that is generically correct — satisfying the format constraint while avoiding commitment on any specific cognitive task.",
+        "The user sees good formatting and assumes the prompt is working, missing that the substance is hollow."
+      ],
+      "so_what": "Always check for task mixing before suggesting format improvements. A well-formatted wrong answer is worse than an obviously bad one."
+    }
+  ]
+}

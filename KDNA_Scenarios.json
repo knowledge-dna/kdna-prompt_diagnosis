@@ -1,0 +1,49 @@
+{
+  "meta": {
+    "version": "0.4",
+    "domain": "prompt_diagnosis",
+    "created": "2026-05-20",
+    "purpose": "Scenario signals for prompt diagnosis — when to apply task mixing detection vs goal ambiguity diagnosis.",
+    "load_condition": "Load when user input describes prompt failure symptoms or asks for prompt review."
+  },
+  "scenes": [
+    {
+      "id": "scene_prompt_produces_wrong_output",
+      "name": "User reports a prompt produces output that looks right but is wrong",
+      "trigger_signal": "User says 'the prompt gave me something that looks correct but misses the point', 'the format is right but the content is off', or 'it answered a different question than I asked'.",
+      "sub_scenarios": [
+        {
+          "id": "sub_task_mixing_detected",
+          "trap_belief": "The prompt is not detailed enough. Add more instructions.",
+          "three_questions": {
+            "belief": "Does this prompt ask the model to generate AND evaluate AND decide in a single response?",
+            "state": "Count the cognitive verbs: create, evaluate, select, revise. Three or more from different categories = task mixing.",
+            "need": "Split the prompt into sequenced tasks: first generate options, then evaluate, then select."
+          },
+          "action_template": "Identify which cognitive tasks are mixed. Recommend splitting into separate prompts with dependency order. Do not add instructions to the existing prompt.",
+          "replace": "Do not add 'be more specific' or 'think step by step.' Split the tasks.",
+          "expected_result": "Each subtask produces output optimized for one cognitive stance. Final result is coherent because it was built sequentially."
+        }
+      ]
+    },
+    {
+      "id": "scene_user_adds_instructions_without_improvement",
+      "name": "User keeps improving the prompt but results do not improve",
+      "trigger_signal": "User describes multiple iterations of prompt refinement with marginal or no improvement. 'I tried adding a role, specifying format, using chain of thought, but it still does not work.'",
+      "sub_scenarios": [
+        {
+          "id": "sub_goal_ambiguity",
+          "trap_belief": "The model needs better instructions to understand the task.",
+          "three_questions": {
+            "belief": "Can the user describe what a correct output would enable them to do next — without seeing the output?",
+            "state": "If the user needs to read the output to know if it is correct, the success criteria are implicit — the model cannot optimize for them.",
+            "need": "A concrete outcome specification: 'I need to decide X' or 'I need to send Y to Z.' Not 'I need a good response.'"
+          },
+          "action_template": "Ask the user: 'If the output were perfect, what specific action would you take next?' If they cannot answer, the prompt goal is ambiguous.",
+          "replace": "Do not iterate on the prompt. Define the outcome first. Then rebuild the prompt around that outcome.",
+          "expected_result": "User articulates what 'correct' means before prompting again. The rewritten prompt includes the outcome definition."
+        }
+      ]
+    }
+  ]
+}
