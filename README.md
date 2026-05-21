@@ -10,6 +10,14 @@
 
 Most prompt failures are task mixing and goal ambiguity, not missing format elements. Fix the cognitive conflict before the formatting.
 
+## Scope
+
+This KDNA helps agents diagnose why a prompt failed: task mixing, goal ambiguity, context gaps, and format compliance that hides wrong substance.
+
+## Out of Scope
+
+This KDNA is not a prompt template collection, jailbreak guide, model-specific tuning manual, or generic prompt engineering checklist. It does not optimize prompts before diagnosing the failure mode.
+
 ## Install
 
 ```bash
