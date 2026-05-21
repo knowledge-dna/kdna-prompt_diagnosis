@@ -1,7 +1,7 @@
 {
   "kdna_spec": "1.0",
   "name": "@aikdna/prompt_diagnosis",
-  "version": "0.7.1",
+  "version": "0.7.5",
   "status": "experimental",
   "access": "open",
   "language": "en",
@@ -24,5 +24,6 @@
   "description": "Prompt diagnosis judgment — identify why a prompt failed (task mixing, goal ambiguity, context gap), not just suggest format improvements.",
   "core_insight": "Most prompt failures are task mixing and goal ambiguity, not missing format elements. Fix the cognitive conflict before the formatting.",
   "file_count": 6,
-  "signature": "ed25519:303204349470c9945a59b2427326b6350440820c6e6f442f5ddb880af9625bc34a03f2c92f4b53a97260fc4d459ffea9a7bdddad5a4e1fa9eaed1443246c9102"
+  "judgment_version": "2026.05",
+  "signature": "ed25519:d4b91178c211736702045ef7f764d9c7805c00671b290b6f6b1dac8f93f773a20dc67c55336efcf45a69247a0f2c924370997132fc24aff601ab49d3f32c830d"
 }

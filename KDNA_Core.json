@@ -11,19 +11,67 @@
       "id": "axiom_task_mixing_is_root_cause",
       "one_sentence": "Most prompt failures are caused by task mixing, not missing format elements.",
       "full_statement": "When a prompt asks the model to simultaneously generate content, evaluate that content, rewrite it, and decide on a strategy, the model cannot determine which goal has priority. The result is usually correct in format but wrong in substance — the model optimizes for form because it cannot optimize for multiple conflicting goals.",
-      "why": "Agents default to suggesting format improvements (add a role, specify output format, add constraints) because task mixing is invisible to surface-level analysis. This produces prompts that look better but fail in the same way — now with better formatting."
+      "why": "Agents default to suggesting format improvements (add a role, specify output format, add constraints) because task mixing is invisible to surface-level analysis. This produces prompts that look better but fail in the same way — now with better formatting.",
+      "applies_when": [
+        "A prompt asks an LLM to draft a marketing email, critique its tone, rewrite it for a younger audience, and output a JSON strategy plan in one go.",
+        "A user complains an LLM's output is 'generic' or 'superficial' after receiving a prompt that combines data extraction, analysis, and report generation.",
+        "Debugging a prompt where the model outputs perfect markdown structure but misses the core analytical requirement because it split attention across conflicting objectives."
+      ],
+      "does_not_apply_when": [
+        "A prompt that only asks for code generation but fails due to missing library versions or incorrect API endpoint parameters.",
+        "A prompt that simply asks for a direct translation or summary but the model hallucinates due to ambiguous or corrupted source text.",
+        "Cases where the prompt is already strictly single-task but fails due to exceeding context window limits or token budget constraints."
+      ],
+      "failure_risk": "The agent will suggest adding XML tags, role prefixes, or stricter output schemas, resulting in a perfectly structured response that still contains logically inconsistent or shallow content.",
+      "confidence": "high",
+      "evidence_type": [
+        "practice_pattern",
+        "case_observation"
+      ]
     },
     {
       "id": "axiom_goal_ambiguity_defeats_instruction_precision",
       "one_sentence": "A perfectly formatted prompt with an ambiguous goal will fail more reliably than a messy prompt with a clear goal.",
       "full_statement": "If the model cannot determine what 'success' means for this specific task — a decision, a piece of content, a classification, an evaluation — no amount of role-playing, chain-of-thought instruction, or output formatting will rescue it. The model needs to know what the finished state looks like, not just what format it should use.",
-      "why": "Prompt optimizers focus on input formatting because it is measurable. But goal ambiguity is the deeper problem. An agent diagnosing a prompt must identify whether the user could recognize a correct answer if they saw one — if not, the prompt is unanswerable regardless of format."
+      "why": "Prompt optimizers focus on input formatting because it is measurable. But goal ambiguity is the deeper problem. An agent diagnosing a prompt must identify whether the user could recognize a correct answer if they saw one — if not, the prompt is unanswerable regardless of format.",
+      "applies_when": [
+        "A prompt asks to 'optimize this business plan' with detailed chain-of-thought steps and JSON output, but never specifies the target metric like profit, growth, or risk reduction.",
+        "A user provides a meticulously structured prompt asking for 'creative ideas' but cannot identify which outputs meet their actual operational needs.",
+        "Debugging a prompt where the model follows all formatting and reasoning rules but delivers irrelevant content because the core success criteria were vague."
+      ],
+      "does_not_apply_when": [
+        "A prompt with a crystal-clear goal like 'extract all email addresses' that fails solely because the output format isn't constrained, causing downstream parsing errors.",
+        "A prompt for a straightforward classification task where the categories are well-defined but the model needs explicit few-shot examples to align decision boundaries.",
+        "Cases where the goal is clear but the model lacks the necessary domain knowledge or tool access to execute it regardless of instruction quality."
+      ],
+      "failure_risk": "The agent will waste effort refining output templates or adding reasoning steps, producing a highly formatted response that completely misses the user's undefined success criteria.",
+      "confidence": "high",
+      "evidence_type": [
+        "practice_pattern",
+        "research_finding"
+      ]
     },
     {
       "id": "axiom_context_gap_is_not_instruction_gap",
       "one_sentence": "When a prompt fails, the missing element is more often context than instruction.",
       "full_statement": "Users add more instructions when prompts fail: 'be more specific,' 'think step by step,' 'consider the audience.' But the model already knows how to be specific and think step by step. What it lacks is the context needed to make a specific judgment — the actual constraints, the real tradeoffs, the specific person and situation. More instructions without more context makes prompts longer, not better.",
-      "why": "Agents mirror the user's instinct to add instructions. The agent must redirect from 'add more instructions' to 'what context is the model missing that it cannot infer from the instructions?'.'"
+      "why": "Agents mirror the user's instinct to add instructions. The agent must redirect from 'add more instructions' to 'what context is the model missing that it cannot infer from the instructions?'.'",
+      "applies_when": [
+        "A prompt asks an LLM to 'write a highly specific legal contract' but provides no jurisdiction, party names, or transaction details.",
+        "A user adds 'analyze thoroughly' and 'consider multiple perspectives' to a prompt about product pricing, but omits competitor data, cost structures, and target margins.",
+        "Debugging a prompt where adding meta-instructions yields longer, more verbose outputs that still lack actionable substance because situational constraints are absent."
+      ],
+      "does_not_apply_when": [
+        "A prompt that fails because the model needs explicit step-by-step reasoning directives to avoid logical errors in complex math or multi-step coding tasks.",
+        "A prompt for a creative writing task where adding stylistic instructions about tone, pacing, and vocabulary level directly improves narrative quality.",
+        "Cases where the prompt lacks basic execution directives like output delimiters or language selection and adding them directly fixes an integration pipeline."
+      ],
+      "failure_risk": "The agent will recommend adding meta-prompting techniques like chain-of-thought or constraint lists, resulting in verbose, self-justifying outputs that still lack the factual or situational grounding needed for a correct decision.",
+      "confidence": "medium",
+      "evidence_type": [
+        "practice_pattern",
+        "case_observation"
+      ]
     }
   ],
   "ontology": [

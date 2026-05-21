@@ -49,14 +49,46 @@
       "wrong": "A longer, more detailed prompt will produce better results than a shorter one.",
       "correct": "Length often correlates with task mixing and instruction bloat. A prompt that is long because it mixes three tasks is worse than three short prompts that each do one thing. A prompt that is long because it adds format instructions without adding context is worse than a short prompt with clear outcome definition.",
       "key_distinction": "Length from task decomposition and context addition improves results. Length from task mixing and instruction redundancy degrades results. The agent must distinguish which kind of length is present.",
-      "why": "Prompt engineers fixate on adding more — more role details, more format specs, more constraints. The agent should push for removal: remove mixed tasks, remove unneeded instructions, remove ambiguity before adding anything."
+      "why": "Prompt engineers fixate on adding more — more role details, more format specs, more constraints. The agent should push for removal: remove mixed tasks, remove unneeded instructions, remove ambiguity before adding anything.",
+      "applies_when": [
+        "When a prompt combines three distinct operations like summarization, translation, and entity extraction into a single instruction block",
+        "When a prompt repeats tone or style constraints across multiple paragraphs without adding new constraints",
+        "When a user appends verbose role-playing personas that do not alter the model's response distribution"
+      ],
+      "does_not_apply_when": [
+        "When a prompt contains a curated set of few-shot examples necessary for complex reasoning or alignment",
+        "When a long prompt provides extensive domain-specific background required for accurate technical translation",
+        "When context window limits force a batch of related queries into a single long prompt with explicit separators"
+      ],
+      "failure_risk": "The agent will aggressively truncate or split necessary contextual information and few-shot examples, causing the model to lose critical grounding and produce shallow or inaccurate responses.",
+      "confidence": "high",
+      "evidence_type": [
+        "practice_pattern",
+        "case_observation"
+      ]
     },
     {
       "id": "misread_good_output_format_equals_good_prompt",
       "wrong": "If the model produces output in the correct format, the prompt is working.",
       "correct": "Correct format with wrong substance is the most dangerous failure mode because it passes surface inspection. The model can produce perfectly formatted JSON or beautifully structured prose while completely missing the actual goal. Prompt diagnosis must evaluate substance before format.",
       "key_distinction": "Format compliance = the output looks right. Goal achievement = the output enables the intended next action. A prompt can achieve the first and fail the second.",
-      "why": "Users and agents both tend to check format first because it is visible. The agent must actively look past format to check whether the output would actually enable the user's next step."
+      "why": "Users and agents both tend to check format first because it is visible. The agent must actively look past format to check whether the output would actually enable the user's next step.",
+      "applies_when": [
+        "When evaluating a prompt that generates JSON but the nested values contain hallucinated facts",
+        "When a prompt returns perfectly structured markdown tables that fail to address the core analytical question",
+        "When a user validates a prompt solely by checking if the output matches a requested template before pipeline deployment"
+      ],
+      "does_not_apply_when": [
+        "When the explicit task is to reformat unstructured logs into a strict CSV schema without altering data content",
+        "When initial prompt debugging requires verifying that the model respects basic syntactic constraints before optimizing for content",
+        "When a downstream API will hard-fail on any structural deviation, making format compliance the immediate prerequisite"
+      ],
+      "failure_risk": "The agent will incorrectly flag a perfectly executed format transformation as a failure and waste cycles demanding substantive changes that fall outside the task's actual scope.",
+      "confidence": "high",
+      "evidence_type": [
+        "case_observation",
+        "practice_pattern"
+      ]
     }
   ],
   "self_check": [
