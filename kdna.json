@@ -1,5 +1,5 @@
 {
-  "kdna_spec": "0.4",
+  "kdna_spec": "1.0-rc",
   "name": "prompt_diagnosis",
   "version": "0.1.0",
   "status": "experimental",
@@ -21,6 +21,5 @@
   ],
   "description": "Prompt diagnosis judgment — identify why a prompt failed (task mixing, goal ambiguity, context gap), not just suggest format improvements.",
   "core_insight": "Most prompt failures are task mixing and goal ambiguity, not missing format elements. Fix the cognitive conflict before the formatting.",
-  "file_count": 6,
-  "spec_version": "1.0-rc"
+  "file_count": 6
 }
