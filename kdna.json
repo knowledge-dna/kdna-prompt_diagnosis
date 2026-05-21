@@ -1,14 +1,15 @@
 {
   "kdna_spec": "1.0",
   "name": "@aikdna/prompt_diagnosis",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "status": "experimental",
   "access": "open",
   "language": "en",
   "author": {
     "name": "KDNA Team",
     "id": "kdna-team",
-    "pubkey": "ed25519:43d22af8f0e189b6fd42bfaab710f52f4bc5f0ae3f5e04719a1a1d9ce9760fbe"
+    "pubkey": "ed25519:43d22af8f0e189b6fd42bfaab710f52f4bc5f0ae3f5e04719a1a1d9ce9760fbe",
+    "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEABYTSKqskFWFgPEykI648/YlhENQJkIZ6bQ6HcznYzKc=\n-----END PUBLIC KEY-----\n"
   },
   "license": {
     "type": "CC-BY-4.0"
@@ -23,5 +24,5 @@
   "description": "Prompt diagnosis judgment — identify why a prompt failed (task mixing, goal ambiguity, context gap), not just suggest format improvements.",
   "core_insight": "Most prompt failures are task mixing and goal ambiguity, not missing format elements. Fix the cognitive conflict before the formatting.",
   "file_count": 6,
-  "signature": "ed25519:5b0ef0643df3419965e3789b5201158510360235b38618750a9d26809902cb1a549410c1002ceb55c4a803ed27c188ffa40634591db9b1738a71b83e2129aa0c"
+  "signature": "ed25519:303204349470c9945a59b2427326b6350440820c6e6f442f5ddb880af9625bc34a03f2c92f4b53a97260fc4d459ffea9a7bdddad5a4e1fa9eaed1443246c9102"
 }
