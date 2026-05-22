@@ -43,6 +43,19 @@ This KDNA helps agents diagnose **prompt failures** in:
 - the failure is due to context window limits or token budget constraints
 - the user is asking for prompt templates rather than diagnosis
 
+## Top Axioms
+
+1. **Most prompt failures are caused by task mixing, not missing format elements.** (`axiom_task_mixing_is_root_cause`)
+2. **A perfectly formatted prompt with an ambiguous goal will fail more reliably than a messy prompt with a clear goal.** (`axiom_goal_ambiguity_defeats_instruction_precision`)
+3. **When a prompt fails, the missing element is more often context than instruction.** (`axiom_context_gap_is_not_instruction_gap`)
+
+## Top Misunderstandings
+
+| Misunderstanding | Correction |
+|---|---|
+| Longer prompt = better prompt | Length often correlates with task mixing and instruction bloat. Three short prompts that each do one thing beat one long prompt that mixes three tasks. |
+| Good output format = good prompt | Correct format with wrong substance is the most dangerous failure mode because it passes surface inspection. Prompt diagnosis must evaluate substance before format. |
+
 ## Known Failure Risks
 
 | Risk | When it shows up |
@@ -51,6 +64,10 @@ This KDNA helps agents diagnose **prompt failures** in:
 | Generic "be more specific" advice | Telling the user to add instructions without diagnosing what kind of specificity is missing |
 | Recommending chain-of-thought for mixed tasks | The model reasons well to the wrong composite question |
 | Treating length as quality | Praising detailed prompts that mix multiple tasks |
+
+## Eval Score
+
+`quality_badge: tested` — 10 standardized eval cases for task mixing detection, goal ambiguity diagnosis, context gap identification, and banned term avoidance. Conforms to `schema/eval.schema.json`.
 
 ## Prompt Triage Framework
 
