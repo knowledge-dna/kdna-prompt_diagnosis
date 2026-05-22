@@ -3,10 +3,20 @@
   "domain": "@aikdna/prompt_diagnosis",
   "input": "I keep making my prompt longer and more detailed but the results aren't improving. My latest version is 800 words with role details, format specs, constraints, examples, and evaluation criteria. What's wrong?",
   "expected_classification": "instruction_bloat",
-  "expected_axioms": ["axiom_task_mixing_is_root_cause", "axiom_goal_ambiguity_defeats_instruction_precision"],
-  "expected_misunderstandings_avoided": ["misread_longer_prompt_is_better_prompt"],
-  "expected_banned_terms_avoided": ["add a role", "be more specific", "use chain of thought"],
+  "expected_axioms": [
+    "axiom_task_mixing_is_root_cause",
+    "axiom_goal_ambiguity_defeats_instruction_precision"
+  ],
+  "expected_misunderstandings_avoided": [
+    "misread_longer_prompt_is_better_prompt"
+  ],
+  "expected_banned_terms_avoided": [
+    "add a role",
+    "be more specific",
+    "use chain of thought"
+  ],
   "output_rubric": "Agent must identify that length from task mixing and instruction redundancy degrades results, not improves them. Must push for removal: remove mixed tasks, remove unneeded instructions, remove ambiguity before adding anything. Must NOT praise the detail or suggest adding more. Must diagnose whether the prompt mixes tasks or lacks a clear outcome definition.",
   "pass": null,
-  "evidence": null
+  "evidence": null,
+  "$schema": "https://aikdna.com/schemas/eval.schema.json"
 }

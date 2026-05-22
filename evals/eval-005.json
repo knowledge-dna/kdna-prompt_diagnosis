@@ -3,10 +3,13 @@
   "domain": "@aikdna/prompt_diagnosis",
   "input": "Why is this code generation prompt failing?\n\n'Write a Python script to upload files to AWS S3 using boto3.'",
   "expected_classification": "out_of_scope",
-  "expected_axioms": ["axiom_task_mixing_is_root_cause"],
+  "expected_axioms": [
+    "axiom_task_mixing_is_root_cause"
+  ],
   "expected_misunderstandings_avoided": [],
   "expected_banned_terms_avoided": [],
   "output_rubric": "Agent should NOT apply task_mixing diagnosis. This is a single-task code generation prompt. The failure is likely missing library versions, incorrect API parameters, or AWS credential issues — not task mixing or goal ambiguity. Agent should diagnose the actual technical failure (check boto3 version, region, bucket permissions) or acknowledge this is outside prompt_diagnosis scope.",
   "pass": null,
-  "evidence": null
+  "evidence": null,
+  "$schema": "https://aikdna.com/schemas/eval.schema.json"
 }

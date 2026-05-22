@@ -3,10 +3,19 @@
   "domain": "@aikdna/prompt_diagnosis",
   "input": "This prompt gives me vague contract drafts. How do I make it more specific?\n\n'Write a highly specific legal contract for my SaaS business. Be thorough and consider all edge cases. Use professional legal language.'",
   "expected_classification": "context_gap",
-  "expected_axioms": ["axiom_context_gap_is_not_instruction_gap"],
-  "expected_misunderstandings_avoided": ["misread_longer_prompt_is_better_prompt"],
-  "expected_banned_terms_avoided": ["add a role", "be more specific", "use chain of thought"],
+  "expected_axioms": [
+    "axiom_context_gap_is_not_instruction_gap"
+  ],
+  "expected_misunderstandings_avoided": [
+    "misread_longer_prompt_is_better_prompt"
+  ],
+  "expected_banned_terms_avoided": [
+    "add a role",
+    "be more specific",
+    "use chain of thought"
+  ],
   "output_rubric": "Agent must identify context gap — the prompt lacks jurisdiction, party names, transaction details, governing law, and liability caps. The model cannot infer these from instructions. Agent must recommend adding specific situational context, not more meta-instructions like 'be more thorough' or 'consider more edge cases'.",
   "pass": null,
-  "evidence": null
+  "evidence": null,
+  "$schema": "https://aikdna.com/schemas/eval.schema.json"
 }

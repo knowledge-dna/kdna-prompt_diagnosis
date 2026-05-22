@@ -1,3 +1,9 @@
+## Prerequisites
+
+- **kdna CLI**: Install via `npm i -g @aikdna/kdna`
+- **Node.js >= 18**
+- **Python 3** (for .kdna ZIP operations)
+
 # Contributing to KDNA
 
 This repository is the KDNA protocol specification. You can contribute at multiple levels.

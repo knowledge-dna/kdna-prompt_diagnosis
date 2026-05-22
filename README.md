@@ -75,3 +75,12 @@ This KDNA helps agents diagnose **prompt failures** in:
 ## License
 
 CC BY 4.0 — attribution required, derivative judgment frameworks welcome.
+
+---
+
+## Install
+
+```bash
+kdna install @aikdna/prompt_diagnosis
+kdna verify @aikdna/prompt_diagnosis --judgment
+```

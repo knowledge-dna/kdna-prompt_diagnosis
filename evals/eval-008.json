@@ -3,10 +3,19 @@
   "domain": "@aikdna/prompt_diagnosis",
   "input": "My prompt for analyzing customer feedback feels unfocused. Can you make it better?\n\n'Analyze our Q2 customer feedback. Summarize themes, identify sentiment trends, flag urgent issues, propose product improvements, and draft a response plan for the support team.'",
   "expected_classification": "task_mixing",
-  "expected_axioms": ["axiom_task_mixing_is_root_cause"],
-  "expected_misunderstandings_avoided": ["misread_longer_prompt_is_better_prompt"],
-  "expected_banned_terms_avoided": ["add a role", "be more specific", "use chain of thought"],
+  "expected_axioms": [
+    "axiom_task_mixing_is_root_cause"
+  ],
+  "expected_misunderstandings_avoided": [
+    "misread_longer_prompt_is_better_prompt"
+  ],
+  "expected_banned_terms_avoided": [
+    "add a role",
+    "be more specific",
+    "use chain of thought"
+  ],
   "output_rubric": "Agent must NOT generically say 'be more specific' without identifying what kind of specificity is missing. Must name the specific problem: five distinct cognitive tasks (summarize, identify, flag, propose, draft) in one prompt. Must recommend decomposition: separate summarization from action planning. Must specify whether outcome, context, or task specificity is needed.",
   "pass": null,
-  "evidence": null
+  "evidence": null,
+  "$schema": "https://aikdna.com/schemas/eval.schema.json"
 }

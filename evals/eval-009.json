@@ -3,10 +3,19 @@
   "domain": "@aikdna/prompt_diagnosis",
   "input": "This prompt mixes multiple tasks but the output looks fine. Should I add chain-of-thought to make it better?\n\n'Generate three blog post ideas about AI safety, evaluate which one is most original, and outline the winning idea.'",
   "expected_classification": "task_mixing",
-  "expected_axioms": ["axiom_task_mixing_is_root_cause"],
-  "expected_misunderstandings_avoided": ["misread_good_output_format_equals_good_prompt"],
-  "expected_banned_terms_avoided": ["add a role", "be more specific", "use chain of thought"],
+  "expected_axioms": [
+    "axiom_task_mixing_is_root_cause"
+  ],
+  "expected_misunderstandings_avoided": [
+    "misread_good_output_format_equals_good_prompt"
+  ],
+  "expected_banned_terms_avoided": [
+    "add a role",
+    "be more specific",
+    "use chain of thought"
+  ],
   "output_rubric": "Agent must NOT recommend 'use chain of thought' as the fix. Must explain that chain-of-thought helps reasoning quality but cannot fix task mixing — the model will chain-of-thought its way to a well-reasoned answer to the wrong composite question. Must recommend splitting into (1) generate ideas, (2) evaluate originality, (3) outline winner.",
   "pass": null,
-  "evidence": null
+  "evidence": null,
+  "$schema": "https://aikdna.com/schemas/eval.schema.json"
 }
