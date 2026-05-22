@@ -1,0 +1,12 @@
+{
+  "id": "pd-eval-006",
+  "domain": "@aikdna/prompt_diagnosis",
+  "input": "This translation prompt gives weird results. What's wrong with it?\n\n'Translate the following text from Spanish to English: \"El proyecto fue un éxito rotundo y todos los participantes estaban muy satisfechos con los resultados obtenidos.\"'",
+  "expected_classification": "out_of_scope",
+  "expected_axioms": ["axiom_task_mixing_is_root_cause"],
+  "expected_misunderstandings_avoided": [],
+  "expected_banned_terms_avoided": [],
+  "output_rubric": "Agent should NOT diagnose task mixing or goal ambiguity. This is a straightforward single-task translation. The failure is likely ambiguous or corrupted source text, not prompt structure. Agent should either check the source text quality or acknowledge this is outside prompt_diagnosis scope.",
+  "pass": null,
+  "evidence": null
+}

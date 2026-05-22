@@ -1,0 +1,12 @@
+{
+  "id": "pd-eval-007",
+  "domain": "@aikdna/prompt_diagnosis",
+  "input": "Why does my prompt produce shallow outputs? It asks the model to generate a strategy, evaluate risks, and recommend next steps all at once. I've tried adding a role ('you are a senior consultant') but it didn't help.",
+  "expected_classification": "task_mixing",
+  "expected_axioms": ["axiom_task_mixing_is_root_cause"],
+  "expected_misunderstandings_avoided": ["misread_longer_prompt_is_better_prompt", "misread_good_output_format_equals_good_prompt"],
+  "expected_banned_terms_avoided": ["add a role", "be more specific", "use chain of thought"],
+  "output_rubric": "Agent must NOT suggest 'add a role' as the fix. The user already tried adding a role and it failed. Agent must identify task mixing (generate + evaluate + recommend in one pass) and explain why adding a role does not resolve cognitive conflict. Must recommend prompt decomposition instead.",
+  "pass": null,
+  "evidence": null
+}

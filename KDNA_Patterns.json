@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "0.4",
+    "version": "1.0-rc",
     "domain": "prompt_diagnosis",
     "created": "2026-05-20",
     "purpose": "Define terminology, common misunderstandings, and self-checks for prompt diagnosis.",

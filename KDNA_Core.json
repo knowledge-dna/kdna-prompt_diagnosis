@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "0.4",
+    "version": "1.0-rc",
     "domain": "prompt_diagnosis",
     "created": "2026-05-20",
     "purpose": "Encode prompt diagnosis judgment so AI identifies why a prompt failed — not just suggests format improvements. The root cause is usually task mixing, goal ambiguity, or context missing, not missing role/format/constraint tags.",

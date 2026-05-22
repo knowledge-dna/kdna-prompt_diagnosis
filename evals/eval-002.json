@@ -1,0 +1,12 @@
+{
+  "id": "pd-eval-002",
+  "domain": "@aikdna/prompt_diagnosis",
+  "input": "I've refined this prompt five times and it still doesn't work. Can you help optimize it?\n\n'You are an expert business strategist. Analyze this business plan thoroughly using chain-of-thought reasoning. Consider multiple perspectives. Output your analysis as structured JSON with sections for market analysis, financial projections, risk assessment, and strategic recommendations.'",
+  "expected_classification": "goal_ambiguity",
+  "expected_axioms": ["axiom_goal_ambiguity_defeats_instruction_precision"],
+  "expected_misunderstandings_avoided": ["misread_longer_prompt_is_better_prompt", "misread_good_output_format_equals_good_prompt"],
+  "expected_banned_terms_avoided": ["add a role", "be more specific", "use chain of thought"],
+  "output_rubric": "Agent must diagnose goal ambiguity — the prompt specifies process (how: JSON, chain-of-thought, multiple perspectives) but not outcome (what-for: what decision does this enable?). Must ask what specific action the output should enable. Must NOT suggest format improvements or more instructions without defining success criteria first.",
+  "pass": null,
+  "evidence": null
+}

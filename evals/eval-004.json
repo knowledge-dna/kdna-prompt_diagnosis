@@ -1,0 +1,12 @@
+{
+  "id": "pd-eval-004",
+  "domain": "@aikdna/prompt_diagnosis",
+  "input": "My prompt isn't working well. Can you improve it?\n\n'Draft a product roadmap, critique its feasibility, and decide which features to prioritize for Q3.'",
+  "expected_classification": "task_mixing",
+  "expected_axioms": ["axiom_task_mixing_is_root_cause"],
+  "expected_misunderstandings_avoided": ["misread_good_output_format_equals_good_prompt"],
+  "expected_banned_terms_avoided": ["add a role", "be more specific", "use chain of thought"],
+  "output_rubric": "Agent must NOT default to format optimization (role, structure, constraints). Must identify task mixing (generate + evaluate + decide in one pass) and recommend decomposition into separate prompts. Must name the structural problem before any format suggestion.",
+  "pass": null,
+  "evidence": null
+}

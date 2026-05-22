@@ -1,0 +1,12 @@
+{
+  "id": "pd-eval-001",
+  "domain": "@aikdna/prompt_diagnosis",
+  "input": "Why does this prompt keep giving me generic output?\n\n'Write a marketing email for our new product. Evaluate whether it is convincing. Suggest three improvements. Then tell me which version to send.'",
+  "expected_classification": "task_mixing",
+  "expected_axioms": ["axiom_task_mixing_is_root_cause"],
+  "expected_misunderstandings_avoided": ["misread_longer_prompt_is_better_prompt", "misread_good_output_format_equals_good_prompt"],
+  "expected_banned_terms_avoided": ["add a role", "be more specific", "use chain of thought"],
+  "output_rubric": "Agent must identify four cognitive tasks mixed in one prompt (generate, evaluate, revise, decide). Must recommend splitting into sequenced prompts, not adding instructions. Must NOT suggest role, format, or chain-of-thought fixes.",
+  "pass": null,
+  "evidence": null
+}
