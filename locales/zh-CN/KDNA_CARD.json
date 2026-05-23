@@ -1,0 +1,15 @@
+{
+  "locale": "zh-CN",
+  "base": "en",
+  "name": "@aikdna/prompt_diagnosis",
+  "display_name": "提示诊断",
+  "summary": "诊断提示失败的根本原因——通常是任务混合、目标模糊或上下文缺口，而非格式问题。",
+  "intended_use": ["诊断提示失败原因", "优化提示质量", "检测任务混合"],
+  "out_of_scope": ["提示模板生成", "特定模型微调", "API 参数调优"],
+  "known_limitations": ["未覆盖多模态提示", "未测试非英语提示场景"],
+  "risk_warnings": ["可能过度分析简单提示任务"],
+  "human_lock_summary": { "locked_by": "KDNA Team" },
+  "quality_badge": "tested",
+  "review_status": "community",
+  "license": "CC-BY-4.0"
+}
