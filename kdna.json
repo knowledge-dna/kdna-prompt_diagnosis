@@ -21,10 +21,16 @@
     "task mixing",
     "goal ambiguity"
   ],
-  "description": "Prompt diagnosis judgment \u2014 identify why a prompt failed (task mixing, goal ambiguity, context gap), not just suggest format improvements.",
+  "description": "Prompt diagnosis judgment — identify why a prompt failed (task mixing, goal ambiguity, context gap), not just suggest format improvements.",
   "core_insight": "Most prompt failures are task mixing and goal ambiguity, not missing format elements. Fix the cognitive conflict before the formatting.",
   "file_count": 6,
   "judgment_version": "2026.05",
   "quality_badge": "tested",
-  "spec_version": "1.0-rc"
+  "spec_version": "1.0-rc",
+  "languages": [
+    "en",
+    "zh-CN"
+  ],
+  "default_language": "en",
+  "i18n_level": "L2"
 }
