@@ -2,8 +2,8 @@
 
 # kdna-prompt_diagnosis
 
-[![KDNA Spec](https://img.shields.io/badge/KDNA-v1.0--rc-4c1)](https://github.com/knowledge-dna/KDNA)
-[![Trust](https://img.shields.io/badge/scope-%40aikdna-blue)](https://github.com/knowledge-dna/kdna-registry)
+[![KDNA Spec](https://img.shields.io/badge/KDNA-v1.0--rc-4c1)](https://github.com/aikdna/KDNA)
+[![Trust](https://img.shields.io/badge/scope-%40aikdna-blue)](https://github.com/aikdna/kdna-registry)
 
 **Prompt diagnosis judgment** — identify why a prompt failed (task mixing, goal ambiguity, context gap), not just suggest format improvements.
 
