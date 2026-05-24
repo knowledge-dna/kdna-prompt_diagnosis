@@ -27,6 +27,7 @@
   "judgment_version": "2026.05",
   "quality_badge": "tested",
   "spec_version": "1.0-rc",
+  "signature": "aikdna-ed25519-placeholder-pending-signing",
   "languages": [
     "en",
     "zh-CN"

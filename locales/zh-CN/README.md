@@ -18,4 +18,4 @@
 - 特定模型微调
 - API 参数调优
 
-详见英文原版：[README.md](https://github.com/knowledge-dna/kdna-prompt_diagnosis)
+详见英文原版：[README.md](https://github.com/aikdna/kdna-prompt_diagnosis)
