@@ -1,103 +1,92 @@
 > 🧬 [aikdna.com](https://aikdna.com) — Official website
 
-# kdna-prompt_diagnosis
+# @aikdna/prompt_diagnosis
 
 [![KDNA Spec](https://img.shields.io/badge/KDNA-v1.0--rc-4c1)](https://github.com/aikdna/KDNA)
 [![Trust](https://img.shields.io/badge/scope-%40aikdna-blue)](https://github.com/aikdna/kdna-registry)
 
 **Prompt diagnosis judgment** — identify why a prompt failed (task mixing, goal ambiguity, context gap), not just suggest format improvements.
 
-## Core Insight
+## What this KDNA changes
 
-Most prompt failures are caused by task mixing and goal ambiguity, not missing format elements. Fix the cognitive conflict before the formatting.
+**Before loading this KDNA, an agent tends to:**
+- Suggest format improvements for failing prompts
+- Add roles, structure, or constraints to any prompt that fails
+- Recommend "be more specific" without diagnosing what kind of specificity
 
-## The Four Questions (v2.1 governance)
+**After loading this KDNA, an agent will judge:**
+- Is the failure caused by task mixing, goal ambiguity, or context gap?
+- Does the prompt ask for generation AND evaluation AND decision in one pass?
+- Can the user describe what a correct output would enable them to do?
+- What does the model need to know that it cannot infer?
 
-### 1. Where does it come from?
+## This KDNA is for
 
-- **Authored by**: KDNA Team
-- **Evidence type**: practice patterns + observed cases across prompt engineering, LLM evaluation, and agent design
-- **Signed by**: `@aikdna` official trust key (fingerprint `43d22af8f0e1`)
+- Prompts that produce well-formatted but substantively wrong output
+- Iterative prompt refinement that yields no improvement
+- Multi-objective prompts where the model defaults to generic responses
+- Debugging sessions where the user keeps adding instructions without adding context
 
-### 2. Where does it apply?
+## This KDNA is not for
 
-This KDNA helps agents diagnose **prompt failures** in:
+- Single-task prompts failing due to missing library versions or API parameters
+- Straightforward translation/summary that fails due to corrupted source text
+- Context window limits or token budget constraints
+- Prompt template requests (not diagnosis)
 
-- prompts that produce well-formatted but substantively wrong output
-- iterative prompt refinement that yields no improvement
-- multi-objective prompts where the model defaults to generic responses
-- debugging sessions where the user keeps adding instructions without adding context
+## Core judgment
 
-### 3. How is it verified?
+Most prompt failures are caused by task mixing and goal ambiguity, not missing format elements. A perfectly formatted prompt with an ambiguous goal will fail more reliably than a messy prompt with a clear goal. When a prompt fails, the missing element is more often context than instruction.
 
-- `kdna verify @aikdna/prompt_diagnosis --judgment` — checks v2.1 governance fields
-- `kdna compare @aikdna/prompt_diagnosis --input "<your prompt>"` — runs with/without KDNA
-- `evals/` directory contains 10 standard eval cases for task mixing detection, goal ambiguity diagnosis, context gap identification, and banned term avoidance
+## Triage framework
 
-### 4. When does it NOT apply?
+1. **Identify task mixing** — does the prompt ask for generation AND evaluation AND decision in one pass?
+2. **Identify goal ambiguity** — can the user describe what a correct output would enable?
+3. **Identify context gap** — what does the model need to know that it cannot infer from instructions?
+4. **Only then** consider format improvements (role, structure, constraints)
 
-**Do not load** when:
+## Common wrong assumptions
 
-- the prompt is strictly single-task but fails due to missing library versions or incorrect API parameters
-- the prompt is a straightforward translation or summary that fails due to corrupted source text
-- the failure is due to context window limits or token budget constraints
-- the user is asking for prompt templates rather than diagnosis
-
-## Top Axioms
-
-1. **Most prompt failures are caused by task mixing, not missing format elements.** (`axiom_task_mixing_is_root_cause`)
-2. **A perfectly formatted prompt with an ambiguous goal will fail more reliably than a messy prompt with a clear goal.** (`axiom_goal_ambiguity_defeats_instruction_precision`)
-3. **When a prompt fails, the missing element is more often context than instruction.** (`axiom_context_gap_is_not_instruction_gap`)
-
-## Top Misunderstandings
-
-| Misunderstanding | Correction |
+| Wrong assumption | Reality |
 |---|---|
-| Longer prompt = better prompt | Length often correlates with task mixing and instruction bloat. Three short prompts that each do one thing beat one long prompt that mixes three tasks. |
-| Good output format = good prompt | Correct format with wrong substance is the most dangerous failure mode because it passes surface inspection. Prompt diagnosis must evaluate substance before format. |
+| Longer prompt = better prompt | Length often correlates with task mixing and instruction bloat |
+| Good output format = good prompt | Correct format with wrong substance is the most dangerous failure mode |
 
-## Known Failure Risks
+## Known failure risks
 
 | Risk | When it shows up |
 |------|---|
-| Suggesting format fixes for task mixing | Adding roles, structure, or constraints to a cognitively overloaded prompt |
-| Generic "be more specific" advice | Telling the user to add instructions without diagnosing what kind of specificity is missing |
-| Recommending chain-of-thought for mixed tasks | The model reasons well to the wrong composite question |
+| Suggesting format fixes for task mixing | Adding roles/structure to a cognitively overloaded prompt |
+| Generic "be more specific" advice | Not diagnosing what kind of specificity is missing |
+| Recommending chain-of-thought for mixed tasks | Model reasons well to the wrong composite question |
 | Treating length as quality | Praising detailed prompts that mix multiple tasks |
 
-## Eval Score
+## Self-checks
 
-`quality_badge: tested` — 10 standardized eval cases for task mixing detection, goal ambiguity diagnosis, context gap identification, and banned term avoidance. Conforms to `schema/eval.schema.json`.
-
-## Prompt Triage Framework
-
-1. **Identify task mixing** — does the prompt ask for generation AND evaluation AND decision in one pass? If yes, split into sequenced prompts.
-2. **Identify goal ambiguity** — can the user describe what a correct output would enable them to do next? If no, define outcome before rewriting.
-3. **Identify context gap** — what does the model need to know that it cannot infer from the instructions?
-4. **Only then** consider format improvements (role, structure, constraints).
-
-## Files
-
-| File | Purpose |
-|------|---------|
-| `KDNA_Core.json` | Axioms (with v2.1 boundaries), ontology, frameworks, causal structure, stances |
-| `KDNA_Patterns.json` | Terminology, banned terms, misunderstandings (with v2.1 boundaries), self-checks |
-| `KDNA_Scenarios.json` | Scenario signals that should shift strategy |
-| `KDNA_Cases.json` | Concrete cases showing diagnosis in practice |
-| `KDNA_Reasoning.json` | Reasoning chains: conclusion → logic → so_what |
-| `KDNA_Evolution.json` | Capability stages (format optimist → task decomposer → prompt architect), measurements |
-| `evals/` | 10 standard eval cases for verification |
-| `kdna.json` | Domain manifest (name, version, signature, judgment_version) |
-
-## License
-
-CC BY 4.0 — attribution required, derivative judgment frameworks welcome.
-
----
+- Did I diagnose task mixing before suggesting format changes?
+- Is the goal unambiguous — can the user describe what success enables?
+- Am I identifying a context gap or just adding more instructions?
+- Is "be more specific" appropriate, or is there a specific gap to address?
 
 ## Install
 
 ```bash
 kdna install @aikdna/prompt_diagnosis
 kdna verify @aikdna/prompt_diagnosis --judgment
+kdna compare @aikdna/prompt_diagnosis --input "<your prompt>"
 ```
+
+## Files
+
+- `KDNA_Core.json` — Axioms, ontology, frameworks, causal structure, stances
+- `KDNA_Patterns.json` — Terminology, banned terms, misunderstandings, self-checks
+- `KDNA_Scenarios.json` — Scenario signals that shift strategy
+- `KDNA_Cases.json` — Concrete cases showing diagnosis in practice
+- `KDNA_Reasoning.json` — Reasoning chains: conclusion → logic → action
+- `KDNA_Evolution.json` — Capability stages, measurable indicators, growth paths
+- `evals/` — 10 standardized eval cases
+- `kdna.json` — Domain manifest
+
+## License
+
+CC BY 4.0 — attribution required, derivative judgment frameworks welcome.
