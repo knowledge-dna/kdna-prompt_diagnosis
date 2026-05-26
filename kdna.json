@@ -1,5 +1,5 @@
 {
-  "kdna_spec": "1.0",
+  "kdna_spec": "1.0-rc",
   "name": "@aikdna/prompt_diagnosis",
   "version": "0.7.5",
   "status": "experimental",
@@ -26,12 +26,12 @@
   "file_count": 6,
   "judgment_version": "2026.05",
   "quality_badge": "tested",
-  "spec_version": "1.0-rc",
-  "signature": "aikdna-ed25519-placeholder-pending-signing",
+  "signature": "ed25519:d4b91178c211736702045ef7f764d9c7805c00671b290b6f6b1dac8f93f773a20dc67c55336efcf45a69247a0f2c924370997132fc24aff601ab49d3f32c830d",
   "languages": [
     "en",
     "zh-CN"
   ],
   "default_language": "en",
-  "i18n_level": "L2"
+  "i18n_level": "L2",
+  "risk_level": "R0"
 }
