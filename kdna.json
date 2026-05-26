@@ -2,7 +2,7 @@
   "kdna_spec": "1.0-rc",
   "name": "@aikdna/prompt_diagnosis",
   "version": "0.7.5",
-  "status": "experimental",
+  "status": "beta",
   "access": "open",
   "language": "en",
   "author": {
