@@ -1,10 +1,25 @@
 {
-  "kdna_spec": "1.0-rc",
+  "format": "kdna",
+  "format_version": "1.0",
+  "spec_version": "1.0-rc",
   "name": "@aikdna/prompt_diagnosis",
-  "version": "0.7.5",
-  "status": "beta",
+  "version": "0.7.6",
+  "asset_type": "domain_judgment",
+  "status": "experimental",
   "access": "open",
-  "language": "en",
+  "privacy_level": "public",
+  "media_type": "application/vnd.aikdna.kdna+zip",
+  "created": "2026-05-20",
+  "updated": "2026-05-29",
+  "description": "Prompt diagnosis judgment — identify why a prompt failed (task mixing, goal ambiguity, context gap), not just suggest format improvements.",
+  "core_insight": "Most prompt failures are task mixing and goal ambiguity, not missing format elements. Fix the cognitive conflict before the formatting.",
+  "keywords": [
+    "prompt engineering",
+    "prompt diagnosis",
+    "prompt optimization",
+    "task mixing",
+    "goal ambiguity"
+  ],
   "author": {
     "name": "KDNA Team",
     "id": "kdna-team",
@@ -14,24 +29,42 @@
   "license": {
     "type": "CC-BY-4.0"
   },
-  "keywords": [
-    "prompt engineering",
-    "prompt diagnosis",
-    "prompt optimization",
-    "task mixing",
-    "goal ambiguity"
-  ],
-  "description": "Prompt diagnosis judgment — identify why a prompt failed (task mixing, goal ambiguity, context gap), not just suggest format improvements.",
-  "core_insight": "Most prompt failures are task mixing and goal ambiguity, not missing format elements. Fix the cognitive conflict before the formatting.",
+  "registry": {
+    "repo": "https://github.com/aikdna/kdna-prompt_diagnosis"
+  },
   "file_count": 6,
   "judgment_version": "2026.05",
   "quality_badge": "tested",
-  "signature": "ed25519:d4b91178c211736702045ef7f764d9c7805c00671b290b6f6b1dac8f93f773a20dc67c55336efcf45a69247a0f2c924370997132fc24aff601ab49d3f32c830d",
   "languages": [
     "en",
     "zh-CN"
   ],
   "default_language": "en",
   "i18n_level": "L2",
-  "risk_level": "R0"
+  "risk_level": "R0",
+  "fitness_for_purpose": {
+    "intended_use": [
+      "prompt failure diagnosis",
+      "prompt review and debugging",
+      "agent instruction triage"
+    ],
+    "not_for": [
+      "generic prompt template generation",
+      "token or context-window limit diagnosis",
+      "API, library, or model-version debugging",
+      "simple formatting-only fixes"
+    ],
+    "requires_human_review_when": [
+      "the prompt affects legal, medical, financial, or safety-critical decisions",
+      "the prompt controls production agent behavior",
+      "the prompt may trigger irreversible tool actions"
+    ],
+    "known_failure_modes": [
+      "over-diagnosing simple formatting issues as cognitive task conflicts",
+      "underweighting missing domain knowledge or missing tool access",
+      "treating model capability limits as prompt design failures"
+    ]
+  },
+  "content_digest": "sha256:ef77aa302c1097564687405c9564b3cbdbda07053ddb3bfdece5aabd7d947ab8",
+  "signature": "ed25519:922c00c9881e84bacab40129bb2ca72d41ec41347bc3b6ce7c7e64a058e56eada79dc0f96f1870da93ef541e005cb56c6d59dfcac35a4c2af52fec2a9b937b0a"
 }

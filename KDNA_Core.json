@@ -27,7 +27,18 @@
       "evidence_type": [
         "practice_pattern",
         "case_observation"
-      ]
+      ],
+      "status": "locked",
+      "human_lock": {
+        "by": "KDNA Team",
+        "at": "2026-05-29",
+        "statement": "Reviewed and locked for official prompt_diagnosis asset release. Applies_when, does_not_apply_when, and failure_risk are intentional judgment boundaries.",
+        "checked": {
+          "applies_when": true,
+          "does_not_apply_when": true,
+          "failure_risk": true
+        }
+      }
     },
     {
       "id": "axiom_goal_ambiguity_defeats_instruction_precision",
@@ -49,7 +60,18 @@
       "evidence_type": [
         "practice_pattern",
         "research_finding"
-      ]
+      ],
+      "status": "locked",
+      "human_lock": {
+        "by": "KDNA Team",
+        "at": "2026-05-29",
+        "statement": "Reviewed and locked for official prompt_diagnosis asset release. Applies_when, does_not_apply_when, and failure_risk are intentional judgment boundaries.",
+        "checked": {
+          "applies_when": true,
+          "does_not_apply_when": true,
+          "failure_risk": true
+        }
+      }
     },
     {
       "id": "axiom_context_gap_is_not_instruction_gap",
@@ -71,7 +93,18 @@
       "evidence_type": [
         "practice_pattern",
         "case_observation"
-      ]
+      ],
+      "status": "locked",
+      "human_lock": {
+        "by": "KDNA Team",
+        "at": "2026-05-29",
+        "statement": "Reviewed and locked for official prompt_diagnosis asset release. Applies_when, does_not_apply_when, and failure_risk are intentional judgment boundaries.",
+        "checked": {
+          "applies_when": true,
+          "does_not_apply_when": true,
+          "failure_risk": true
+        }
+      }
     }
   ],
   "ontology": [
